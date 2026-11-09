@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>One Keyboard. Three Systems. · Deskflow Field Notes</title>
+  <meta name="description" content="一套键鼠控制 Windows、Linux、macOS：Deskflow 实战、AI 辅助排障、Samba 文件共享。包含失败、日志和可复现步骤。">
+  <meta name="theme-color" content="#0b1120">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="One Keyboard. Three Systems.">
+  <meta property="og:description" content="A reproducible Windows / Linux / macOS KVM setup, with the failures included.">
+  <meta property="og:image" content="https://raw.githubusercontent.com/ztguoresearch/one-keyboard-three-systems/main/assets/hero.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="assets/architecture.svg" type="image/svg+xml">
+  <style>
+    :root {
+      --bg: #0b1120;
+      --panel: #111827;
+      --panel-2: #0f172a;
+      --line: #1e293b;
+      --text: #e2e8f0;
+      --muted: #94a3b8;
+      --dim: #64748b;
+      --cyan: #38bdf8;
+      --amber: #f59e0b;
+      --blue: #2563eb;
+      --max: 1080px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background:
+        radial-gradient(900px 500px at 85% -10%, rgba(37, 99, 235, .22), transparent 60%),
+        radial-gradient(700px 500px at 0% 100%, rgba(245, 158, 11, .10), transparent 60%),
+        var(--bg);
+      color: var(--text);
+      font-family: "Segoe UI", "PingFang SC", "Microsoft YaHei", system-ui, -apple-system, Arial, sans-serif;
+      line-height: 1.7;
+    }
+    a { color: var(--cyan); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .wrap { width: min(var(--max), calc(100% - 40px)); margin: 0 auto; }
+    .nav {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 22px 0; gap: 20px; flex-wrap: wrap;
+    }
+    .brand {
+      font-size: 12px; letter-spacing: .22em; font-weight: 700;
+      color: var(--cyan); text-transform: uppercase;
+    }
+    .nav-links { display: flex; gap: 18px; flex-wrap: wrap; font-size: 14px; }
+    .nav-links a { color: var(--muted); }
+    .nav-links a:hover { color: var(--text); }
+    header.hero { padding: 18px 0 10px; }
+    .eyebrow {
+      margin: 0 0 8px; font-size: 12px; letter-spacing: .24em;
+      color: var(--dim); text-transform: uppercase;
+    }
+    h1 {
+      margin: 0 0 12px; font-size: clamp(28px, 5vw, 52px);
+      line-height: 1.15; letter-spacing: -.02em;
+    }
+    .lede { max-width: 760px; margin: 0 0 22px; color: var(--muted); font-size: 17px; }
+    .actions { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 28px; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 10px 16px; border-radius: 10px; border: 1px solid var(--line);
+      color: var(--text); background: rgba(255,255,255,.02); font-size: 14px;
+    }
+    .btn:hover { text-decoration: none; border-color: #334155; background: rgba(255,255,255,.05); }
+    .btn.primary { background: var(--blue); border-color: var(--blue); color: #fff; }
+    .btn.primary:hover { background: #1d4ed8; }
+    .hero-img {
+      display: block; width: 100%; height: auto;
+      border-radius: 18px; border: 1px solid var(--line);
+      box-shadow: 0 30px 80px rgba(0, 0, 0, .45);
+    }
+    main { padding: 28px 0 10px; }
+    .grid {
+      display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px; margin: 18px 0 30px;
+    }
+    .card {
+      background: linear-gradient(180deg, rgba(17,24,39,.85), rgba(15,23,42,.85));
+      border: 1px solid var(--line); border-radius: 16px; padding: 22px;
+    }
+    .card .kicker { font-size: 12px; color: var(--amber); letter-spacing: .14em; text-transform: uppercase; }
+    .card h2 { margin: 6px 0 8px; font-size: 20px; }
+    .card p { margin: 0 0 12px; color: var(--muted); font-size: 15px; }
+    .card a { font-size: 14px; }
+    .steps {
+      border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+      padding: 26px 0; margin: 10px 0 30px;
+    }
+    .steps h2 { margin: 0 0 14px; font-size: 22px; }
+    .step-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
+    .step { color: var(--muted); font-size: 14px; }
+    .step strong { display: block; color: var(--text); font-size: 15px; margin-bottom: 4px; }
+    .step .n { color: var(--cyan); font-family: ui-monospace, SFMono-Regular, Consolas, monospace; font-size: 12px; }
+    footer {
+      padding: 26px 0 40px; color: var(--dim); font-size: 13px;
+      display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap;
+      border-top: 1px solid var(--line);
+    }
+    @media (max-width: 760px) {
+      .grid, .step-grid { grid-template-columns: 1fr; }
+      header.hero { padding-top: 6px; }
+      .lede { font-size: 16px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <nav class="nav">
+      <div class="brand">Deskflow Field Notes</div>
+      <div class="nav-links">
+        <a href="https://github.com/ztguoresearch/one-keyboard-three-systems">GitHub</a>
+        <a href="https://github.com/ztguoresearch/one-keyboard-three-systems/blob/main/blog/2026-11-09-ai-break-capital-kvm.md">长文</a>
+        <a href="https://github.com/ztguoresearch/one-keyboard-three-systems/tree/main/docs">文档</a>
+        <a href="#quick-start">快速开始</a>
+      </div>
+    </nav>
+
+    <header class="hero">
+      <p class="eyebrow">Windows · Linux · macOS</p>
+      <h1>一套键鼠，三台电脑。</h1>
+      <p class="lede">
+        用开源 Deskflow 把多台机器接成一张桌子。这里没有“十分钟无脑教程”，
+        只有可复现的配置、真实的报错、以及一次 AI 辅助排障的完整复盘。
+      </p>
+      <div class="actions">
+        <a class="btn primary" href="https://github.com/ztguoresearch/one-keyboard-three-systems/blob/main/blog/2026-11-09-ai-break-capital-kvm.md">读完整长文 →</a>
+        <a class="btn" href="https://github.com/ztguoresearch/one-keyboard-three-systems">查看仓库</a>
+        <a class="btn" href="https://github.com/ztguoresearch/one-keyboard-three-systems/blob/main/docs/10-checklist.md">复现清单</a>
+      </div>
+      <img class="hero-img" src="assets/hero.png" alt="Deskflow 跨系统架构：Windows Server、Linux Client、macOS 可选客户端、Samba 文件共享">
+    </header>
+
+    <main>
+      <section class="grid">
+        <article class="card">
+          <div class="kicker">Why not a cable</div>
+          <h2>对拷线救不了 Linux</h2>
+          <p>成品对拷线的文件互传依赖 Windows 客户端，Linux 往往只能共享键鼠。问题不在线，在线的两端有没有软件。</p>
+          <a href="https://github.com/ztguoresearch/one-keyboard-three-systems/blob/main/docs/01-why-not-usb-cable.md">读这一章 →</a>
+        </article>
+        <article class="card">
+          <div class="kicker">Network</div>
+          <h2>先把静态 IP 配好</h2>
+          <p>直连没有 DHCP。Windows 的 169.254.x.x 和 Linux 的 10.10.10.2 不在一个网段，Deskflow 永远连不上。</p>
+          <a href="https://github.com/ztguoresearch/one-keyboard-three-systems/blob/main/docs/05-network-security.md">看网络与安全 →</a>
+        </article>
+        <article class="card">
+          <div class="kicker">Clipboard</div>
+          <h2>图片不是文件</h2>
+          <p>复制图片像素可以，复制 PNG 文件不行。默认 3 MB 的剪贴板还要为 4K 截图调大。</p>
+          <a href="https://github.com/ztguoresearch/one-keyboard-three-systems/blob/main/docs/06-clipboard.md">看剪贴板边界 →</a>
+        </article>
+        <article class="card">
+          <div class="kicker">AI + debugging</div>
+          <h2>AI 是副驾，不是自动驾驶</h2>
+          <p>它帮我们读日志、列假设、写命令；也会把 IP 猜错、把旧配置套到新版本上。证据永远优先于猜测。</p>
+          <a href="https://github.com/ztguoresearch/one-keyboard-three-systems/blob/main/docs/09-ai-workflow.md">看 AI 排障复盘 →</a>
+        </article>
+      </section>
+
+      <section class="steps" id="quick-start">
+        <h2>四步跑起来</h2>
+        <div class="step-grid">
+          <div class="step"><span class="n">01</span><strong>装到纯英文路径</strong>Windows 用 C:\Tools\Deskflow，避开中文路径的 vector too long。</div>
+          <div class="step"><span class="n">02</span><strong>配同网段静态 IP</strong>10.10.10.1 / 10.10.10.2，网关留空。</div>
+          <div class="step"><span class="n">03</span><strong>Windows 做 Server</strong>Linux 做 Client，连 10.10.10.1:24800。</div>
+          <div class="step"><span class="n">04</span><strong>文件走 Samba</strong>Linux 共享 /srv/share，Windows 映射 Z: 盘。</div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div>© 2026 ztguoresearch · 文章 CC BY-SA 4.0 · 脚本 MIT</div>
+      <div>
+        <a href="https://github.com/ztguoresearch/one-keyboard-three-systems/blob/main/LICENSE-CONTENT.md">License</a>
+        ·
+        <a href="https://github.com/ztguoresearch/one-keyboard-three-systems/blob/main/CONTRIBUTING.md">Contributing</a>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>

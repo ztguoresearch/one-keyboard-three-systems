@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">Deskflow cross-OS keyboard and mouse sharing architecture</title>
+  <desc id="desc">Windows runs Deskflow Server, Linux runs Deskflow Client over TCP 24800 with TLS. Linux shares files with Windows over SMB 445. macOS is an optional client.</desc>
+
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0b1120"/>
+      <stop offset="1" stop-color="#111827"/>
+    </linearGradient>
+    <linearGradient id="win" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#1d4ed8"/>
+      <stop offset="1" stop-color="#0ea5e9"/>
+    </linearGradient>
+    <linearGradient id="linux" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#b45309"/>
+      <stop offset="1" stop-color="#f59e0b"/>
+    </linearGradient>
+    <linearGradient id="mac" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#334155"/>
+      <stop offset="1" stop-color="#64748b"/>
+    </linearGradient>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#94a3b8"/>
+    </marker>
+    <marker id="arrow2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#38bdf8"/>
+    </marker>
+  </defs>
+
+  <rect width="1200" height="630" fill="#0b1120"/>
+  <rect width="1200" height="630" rx="28" fill="url(#bg)"/>
+  <circle cx="1090" cy="90" r="160" fill="#1d4ed8" opacity="0.12"/>
+  <circle cx="120" cy="560" r="180" fill="#f59e0b" opacity="0.08"/>
+
+  <text x="72" y="92" font-family="Segoe UI, Arial, sans-serif" font-size="20" fill="#38bdf8" letter-spacing="4">DESKFLOW FIELD NOTES</text>
+  <text x="72" y="152" font-family="Segoe UI, Arial, sans-serif" font-size="46" font-weight="700" fill="#f8fafc">One keyboard. Three systems.</text>
+  <text x="72" y="194" font-family="Segoe UI, Arial, sans-serif" font-size="22" fill="#94a3b8">A reproducible Windows / Linux / macOS KVM setup, with the failures included.</text>
+
+  <!-- keyboard / mouse -->
+  <g>
+    <rect x="72" y="260" width="190" height="86" rx="18" fill="#1e293b" stroke="#334155"/>
+    <text x="167" y="296" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="18" fill="#e2e8f0">Keyboard</text>
+    <text x="167" y="324" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="18" fill="#e2e8f0">+ Mouse</text>
+  </g>
+
+  <!-- arrows keyboard to Windows -->
+  <line x1="262" y1="303" x2="360" y2="303" stroke="#94a3b8" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <!-- Windows -->
+  <g>
+    <rect x="370" y="238" width="250" height="130" rx="20" fill="url(#win)" opacity="0.95"/>
+    <text x="495" y="286" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="700" fill="#ffffff">Windows 11</text>
+    <text x="495" y="320" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="18" fill="#dbeafe">Deskflow Server</text>
+    <text x="495" y="346" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="15" fill="#bfdbfe">10.10.10.1</text>
+  </g>
+
+  <!-- Windows to Linux -->
+  <line x1="620" y1="282" x2="748" y2="282" stroke="#38bdf8" stroke-width="3" marker-end="url(#arrow2)"/>
+  <line x1="748" y1="312" x2="620" y2="312" stroke="#38bdf8" stroke-width="3" marker-end="url(#arrow2)"/>
+  <text x="684" y="262" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="14" fill="#7dd3fc">TCP 24800 · TLS</text>
+
+  <!-- Linux -->
+  <g>
+    <rect x="758" y="238" width="250" height="130" rx="20" fill="url(#linux)" opacity="0.95"/>
+    <text x="883" y="286" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="700" fill="#ffffff">Linux</text>
+    <text x="883" y="320" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="18" fill="#fef3c7">Deskflow Client</text>
+    <text x="883" y="346" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="15" fill="#fde68a">10.10.10.2</text>
+  </g>
+
+  <!-- macOS optional -->
+  <g opacity="0.85">
+    <rect x="758" y="420" width="250" height="88" rx="18" fill="url(#mac)" stroke="#475569"/>
+    <text x="883" y="456" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="19" fill="#e2e8f0">macOS</text>
+    <text x="883" y="484" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="15" fill="#cbd5e1">optional client</text>
+  </g>
+  <line x1="883" y1="368" x2="883" y2="414" stroke="#64748b" stroke-width="2" stroke-dasharray="6 6" marker-end="url(#arrow)"/>
+
+  <!-- SMB -->
+  <g>
+    <rect x="370" y="420" width="250" height="88" rx="18" fill="#1e293b" stroke="#334155"/>
+    <text x="495" y="456" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="19" fill="#e2e8f0">Samba /srv/share</text>
+    <text x="495" y="484" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="15" fill="#94a3b8">SMB 445</text>
+  </g>
+  <line x1="758" y1="464" x2="626" y2="464" stroke="#94a3b8" stroke-width="2" stroke-dasharray="6 6" marker-end="url(#arrow)"/>
+
+  <!-- footer -->
+  <line x1="72" y1="556" x2="1128" y2="556" stroke="#1e293b" stroke-width="2"/>
+  <text x="72" y="590" font-family="Segoe UI, Arial, sans-serif" font-size="16" fill="#64748b">10.10.10.0/24 · Deskflow 1.27.0 · Samba · No KVM switch, no USB transfer cable.</text>
+  <text x="1128" y="590" text-anchor="end" font-family="Segoe UI, Arial, sans-serif" font-size="16" fill="#64748b">github.com/ztguoresearch/one-keyboard-three-systems</text>
+</svg>
