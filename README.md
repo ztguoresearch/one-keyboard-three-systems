@@ -4,7 +4,7 @@
 > 也是一次 AI 辅助排障的完整复盘：从“对拷线不支持 Linux”到 24800 只对直连 IP 开放。
 
 **仓库**：<https://github.com/ztguoresearch/one-keyboard-three-systems>  
-**项目主页**：<https://ztguoresearch.github.io/one-keyboard-three-systems/>（启用 GitHub Pages 后）
+**项目主页**：<https://ztguoresearch.github.io/one-keyboard-three-systems/>
 
 [![License: CC BY-SA 4.0](https://img.shields.io/badge/License-CC%20BY--SA%204.0-lightgrey.svg)](LICENSE-CONTENT.md)
 [![Code: MIT](https://img.shields.io/badge/Code-MIT-blue.svg)](LICENSE)
@@ -167,7 +167,7 @@ sudo nmcli con up "Wired connection 1"
 ## 仓库与主页
 
 - 仓库：<https://github.com/ztguoresearch/one-keyboard-three-systems>
-- 主页：<https://ztguoresearch.github.io/one-keyboard-three-systems/>（在 Settings → Pages 里启用）
+- 主页：<https://ztguoresearch.github.io/one-keyboard-three-systems/>（已启用）
 - 推送、Pages、社交预览的步骤：[`docs/12-publish.md`](docs/12-publish.md)
 
 ## 适用与不适用

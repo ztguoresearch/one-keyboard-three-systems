@@ -1,7 +1,7 @@
 # 推送、GitHub Pages 与社交预览
 
 > 实际仓库：<https://github.com/ztguoresearch/one-keyboard-three-systems>  
-> 实际主页（启用 Pages 后）：<https://ztguoresearch.github.io/one-keyboard-three-systems/>
+> 实际主页（已启用）：<https://ztguoresearch.github.io/one-keyboard-three-systems/>
 
 ## 1. 当前仓库信息
 
@@ -33,7 +33,7 @@ git push -u origin main
 如果弹出 GitHub 登录窗口，按提示授权即可。  
 如果没有弹窗且提示认证失败，建议用 GitHub 的 Personal Access Token，或改用 SSH。
 
-## 3. 启用 GitHub Pages
+## 3. GitHub Pages（已启用）
 
 1. 打开仓库：Settings → Pages；
 2. Source 选 **Deploy from a branch**；
